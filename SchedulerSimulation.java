@@ -30,6 +30,9 @@ class Process implements Runnable {
     private int timeQuantum; // Time slice (time quantum) allowed per CPU access (in milliseconds)
     private int remainingTime; // Time left for the process to finish its execution
 
+// Feature 1: Process Priority 
+private int priority;
+
     // Constructor to initialize the process with name, burst time, and time quantum
     public Process(String name, int burstTime, int timeQuantum) {
         this.name = name;
@@ -137,6 +140,14 @@ class Process implements Runnable {
         return remainingTime;
     }
 
+    // Feature 1
+public void setPriority(int priority) {
+    this.priority = priority;
+}
+
+public int getPriority() {
+    return priority;
+}
     // Check if the process has finished (i.e., no remaining time)
     public boolean isFinished() {
         return remainingTime <= 0;
@@ -198,6 +209,9 @@ public class SchedulerSimulation {
             
             // Create a new process object with a unique name, burst time, and the defined time quantum
             Process process = new Process("P" + i, burstTime, timeQuantum);
+
+            // Feature 1: Generate a random display-only priority from 1 to 10
+process.setPriority(1 + random.nextInt(10));
             
             // Add the process to the ready queue and the map
             addProcessToQueue(process, processQueue, processMap);
@@ -293,7 +307,7 @@ public class SchedulerSimulation {
         // Print a message indicating the process has entered the ready queue
         System.out.println(Colors.BLUE + "  ➕ " + Colors.BOLD + Colors.CYAN + process.getName() + 
                           Colors.RESET + Colors.BLUE + " added to ready queue" + Colors.RESET + 
-                          " │ Burst time: " + Colors.YELLOW + process.getBurstTime() + "ms" + 
-                          Colors.RESET);
+                          " │ Burst time: " + Colors.YELLOW + process.getBurstTime() + "ms │ Priority: " + Colors.RESET+
+    process.getPriority());
     }
 }
