@@ -155,6 +155,9 @@ public int getPriority() {
 }
 
 public class SchedulerSimulation {
+
+    // Feature 2: Context Switch Counter - counts each scheduled process start
+private static int contextSwitchCount = 0;
     public static void main(String[] args) {
         // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
         // This makes your output unique to you - DO NOT forget to change this!
@@ -249,6 +252,9 @@ process.setPriority(1 + random.nextInt(10));
             }
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
+
+            // Feature 2: Increment the counter when the scheduled process starts running
+contextSwitchCount++;
             
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
@@ -274,11 +280,15 @@ process.setPriority(1 + random.nextInt(10));
                     System.out.println(Colors.BRIGHT_YELLOW + "  ⚠ " + Colors.CYAN + process.getName() + 
                                       Colors.RESET + Colors.YELLOW + " is the last process → running to completion" + 
                                       Colors.RESET);
+                                    
                     process.runToCompletion(); // Run until the process completes
                 }
             }
         }
-        
+        // Feature 2: Display the total number of context switches.
+System.out.println(Colors.BOLD + Colors.BRIGHT_YELLOW +
+                  "Total context switches: " + contextSwitchCount + Colors.RESET + "\n");
+
         // End of the scheduler simulation
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
