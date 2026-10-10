@@ -39,7 +39,7 @@
 
 ## 🎥 Video Link
 
-**Video Link**: [Paste your video link here]
+**Video Link**: [https://drive.google.com/file/d/1Yu5HrWa9tYCralTn-UtplrqnVfZa9hMt/view?usp=sharing]
 
 > ⚠️ **WARNING:** The video must be **publicly accessible** ("Anyone with the link can view") on **Google Drive**, **YouTube (Unlisted or Public)** or any other cloud file-sharing system. A private, restricted or broken link counts as a **missing video (-1 mark)**.
 >
@@ -369,33 +369,34 @@ When addProcessToQueue() uses new Thread(process) to create a thread, P1 enters 
 > 💡 **TIP:** Relate each example back to your simulation: what plays the role of the "process", the "time quantum" and the "context switch" in that scenario?
 
 **Your Answer:** *(3-5 sentences per example)*
+P1's thread is in the New state when addProcessToQueue() generates a thread using new Thread(process). P1's thread becomes Runnable and may be scheduled for execution when the scheduler invokes currentThread.start(). P1's thread is running when it calls its run() method, and it momentarily enters Timed Waiting when it calls Thread.sleep(stepTime). The Main Thread waits for P1's thread to complete its current execution after calling currentThread.join(). P1's thread enters the Terminated state upon completion of its execute() operation.
 
-### Example 1 (operating-system level): [Name of scenario]
-
-**Description**:
-[Describe the real-world scenario.]
-
-**Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
-
-### Example 2: [Name of application/scenario]
+### Example 1 (operating-system level): [CPU Scheduling]
 
 **Description**:
-[Describe the real-world scenario or application.]
+Round-Robin scheduling allows an operating system to distribute CPU time among several ready tasks. Every process is given a set amount of time to run; if it doesn't finish, it goes back to the end of the ready queue.
 
 **Why Round-Robin works well here**:
-[Fairness, responsiveness, predictability?]
+By allowing each ready process a time to access the CPU, Round-Robin enhances fairness. A context switch enables execution to switch between processes, and the time quantum restricts how long a process can run in a single turn. By doing this, one long-running process is kept from continuously using the CPU while other processes are waiting.
+
+### Example 2: [Background Job Processing]
+
+**Description**:
+A Round-Robin-like scheduling approach can be used by an application that handles several background jobs to give each job a turn. Unfinished tasks are returned to the queue to await their next turn, and each job has a set execution time.
+
+**Why Round-Robin works well here**:
+Because one long-running task does not monopolize execution time, this strategy increases fairness. By letting other jobs advance while the longer jobs wait, it can also increase responsiveness. The scheduling behavior shown in my CPU Scheduler Simulation is comparable to the time quantum and task switching.
 
 ## Summary
 
 **Key concepts I understood through these questions:**
-1.
-2.
-3.
+1.The distinction between a Java thread and a simulated process
+2.How Round-Robin distributes CPU time equitably using a time quantum and ready queue
+3.Thread execution is impacted by Thread.start(), Thread.sleep(), and Thread.join()
 
 **Concepts I need to study more:**
-1.
-2.
+1. the variations between operating-system context transitions and thread lifetime states
+2.The fairness and responsiveness of Round-Robin in comparison to other CPU scheduling techniques
 
 ---
 
